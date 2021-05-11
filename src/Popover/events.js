@@ -1,15 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import getCommonContainer from '../utils/dom/popContainer'
 import { popoverClass } from '../styles'
-import ready from '../utils/dom/ready'
 
 let currentProps = null
 const div = document.createElement('div')
 div.style.display = 'none'
 
-ready(() => {
-  document.body.appendChild(div)
-})
+getCommonContainer().appendChild(div)
 
 const arrow = document.createElement('div')
 arrow.className = popoverClass('arrow')

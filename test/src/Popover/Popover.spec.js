@@ -48,7 +48,9 @@ describe('Popover[Base]', () => {
       expectModalText
     )
 
-    document.body.innerHTML = ''
+    document.querySelectorAll(`.${SO_PREFIX}-popover`).forEach(item => {
+      item.remove()
+    })
     const wrapperClick = mount(
       <Button>
         <Popover trigger="click">{modalText}</Popover>
@@ -87,7 +89,9 @@ describe('Popover[Base]', () => {
 
   test('should popover width control', () => {
     jest.useFakeTimers()
-    document.body.innerHTML = ''
+    document.querySelectorAll(`.${SO_PREFIX}-popover`).forEach(item => {
+      item.remove()
+    })
     const wrapperHover = mount(<P />)
     expect(document.querySelectorAll(`.${SO_PREFIX}-popover`).length).toBe(1)
   })
