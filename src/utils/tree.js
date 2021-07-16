@@ -9,7 +9,7 @@ export const getFilterTree = (
   childrenKey = 'children',
   showHitDescendants,
   firstMatchNode,
-  { advanced }
+  { advanced } = {}
 ) => {
   const mapFilteredNodeToData = node => {
     if (!node) return null
@@ -38,20 +38,19 @@ export const getFilterTree = (
 
 export const getFlattenTree = (data, childrenKey = 'children') => {
   const arr = []
-  let path = []
-  const flatten = list => {
+  const flatten = (list, path) => {
     list.forEach(item => {
       const children = item[childrenKey]
       if (children && children.length > 0) {
-        path.push(item)
-        flatten(children)
+        const clonedPath = [...path]
+        clonedPath.push(item)
+        flatten(children, clonedPath)
       } else {
         arr.push([...path, item])
       }
     })
-    path = []
   }
-  flatten(data)
+  flatten(data, [])
   return arr
 }
 
